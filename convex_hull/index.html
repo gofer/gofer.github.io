@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>凸包</title>
+<style>
+body {
+  background-color: #e5e5e5;
+}
+
+#canvas {
+  width:  800px;
+  height: 600px;
+}
+</style>
+<script src="convex_hull.js"></script>
+<script>
+var width  = 800;
+var height = 600;
+
+window.onload = function(){
+  document.getElementById('submit').onclick = main;
+  main();
+};
+</script>
+</head>
+<body>
+  <header><h1>凸包</h1></header>
+  <articlea>
+    <canvas id="canvas"></canvas>
+    <div>
+      <form id="form">
+        <input type="text" id="number" value="20"></input>
+        <input type="button" id="submit" value="更新"></input>
+      </form>
+    </div>
+  </article>
+  <article>
+    <h2>参考文献</h2>
+    <p>以下の情報を参考にした。</p>
+    <ul>
+      <li><a href="https://ja.wikipedia.org/wiki/%E5%87%B8%E5%8C%85">凸包 - Wikipedia</a></li>
+      <li><a href="https://ja.wikipedia.org/wiki/%E3%82%AE%E3%83%95%E3%83%88%E5%8C%85%E8%A3%85%E6%B3%95">ギフト包装法 - Wikipedia</a></li>
+    </ul>
+  </article>
+</body>
+</html>
