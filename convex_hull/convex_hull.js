@@ -42,6 +42,12 @@ function drawCurrentPoint(context, x, y)
   drawCircle(context, x, y, 4, true);
 }
 
+function drawConvexPoint(context, x, y)
+{
+  context.fillStyle = 'blue';
+  drawCircle(context, x, y, 4, true);
+}
+
 function drawLine(context, sx, sy, dx, dy)
 {
   context.beginPath();
@@ -70,6 +76,10 @@ function draw(canvas, context, points, L)
 
   for (var i = 0; i < points.length; ++i) {
     drawPoint(context, points[i].x, points[i].y);
+  }
+
+  for (var i = 0; i < L.length - 1; ++i) {
+    drawConvexPoint(context, L[i].x, L[i].y);
   }
 
   drawCurrentPoint(context, points[0].x, points[0].y);
