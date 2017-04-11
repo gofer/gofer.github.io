@@ -78,7 +78,7 @@ function draw(canvas, context, points, L)
     drawPoint(context, points[i].x, points[i].y);
   }
 
-  for (var i = 0; i < L.length - 1; ++i) {
+  for (var i = 0; i < L.length; ++i) {
     drawConvexPoint(context, L[i].x, L[i].y);
   }
 
