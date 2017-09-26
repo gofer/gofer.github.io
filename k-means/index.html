@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>k-means</title>
+    <style>
+    <!--
+    body {
+      background-color: #e5e5e5;
+    }
+    canvas#canvas {
+      width: 800px;
+      height: 600px;
+      background-color: white;
+    }
+    -->
+    </style>
+    <script src="./k-means.js"></script>
+    <script>
+    <!--
+    function doCalculate() {
+      var number_of_samples  = document.getElementById('number-of-samples').value;
+      var number_of_clusters = document.getElementById('number-of-clusters').value;
+      
+      var means = [];
+      for (let index = 0; index < number_of_clusters; ++index) {
+        means[index] = calculateMeansOfCluster(samples, index);
+      }
+      
+      var result = reselectNearestCluster(samples, means);
+      samples = result.samples;
+      
+      draw(samples, number_of_samples, number_of_clusters, means);
+      
+      return result.flag;
+    }
+
+    function enableController(flag) {
+      [
+        'number-of-samples', 
+        'number-of-clusters', 
+        'repaint-button', 
+        'calculate-1step-button', 
+        'calculate-animate-button'
+      ].forEach((id) => {
+        document.getElementById(id).disabled = flag ? '' : 'disabled';
+      });
+    }
+
+    function doAnimate() {
+      enableController(false);
+      
+      var result = doCalculate();
+      if (result) {
+        setTimeout(doAnimate, 100);
+      } else {
+        enableController(true);
+      }
+    }
+    
+    window.onload = function onload() {
+      document.getElementById('number-of-samples').value  = InitialNumberOfSamples;
+      document.getElementById('number-of-clusters').value = InitialNumberOfClusters;
+      
+      document.getElementById('repaint-button').onclick = () => { doInitialize(); };
+      document.getElementById('calculate-1step-button').onclick = () => { doCalculate(); };
+      document.getElementById('calculate-animate-button').onclick = () => { doAnimate(); };
+      
+      doInitialize();
+    }
+    -->
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>k-means(k-平均法)</h1>
+    </header>
+    <article>
+      <div id="canvas-container">
+        <canvas id="canvas" width="800" height="600"></canvas>
+      </div>
+      <div id="controller-container">
+        <div id="controller">
+          <button id="calculate-1step-button">再計算(1ステップ)</button>
+          <button id="calculate-animate-button">再計算(アニメーション)</button>
+          <label>標本数(n):</label>
+          <input size="12" maxlength="8" type="number" id="number-of-samples" value="0"></input>
+          <label>クラスタ数(k):</label>
+          <input size="8" maxlength="4" type="number" id="number-of-clusters" value="0"></input>
+          <button id="repaint-button">再描画</button>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>
