@@ -1,86 +1,92 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>ルンゲ－クッタ法</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-<style>
-body {
-  background-color: #e5e5e5;
-}
-</style>
-<script>
-['./image1_rk1.gif', './image1_rk4.gif', './image2_rk1.gif', './image2_rk4.gif'].forEach(
-  function(src){ (new Image()).src = src; }
-);
-
-window.onload = function() {
-  document.querySelectorAll('[class=tex]').forEach(
-    function(e){
-      console.log(e.textContent);
-      katex.render(e.textContent, e, {displayMode: true});
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ルンゲ－クッタ法</title>
+    <style>
+    <!--
+    body {
+      background-color: #e5e5e5;
     }
-  );
-}
-</script>
-</head>
-<body>
-  <header><h1>ルンゲ－クッタ法</h1></header>
-  
-  <article>
-    <header><h3>例1<h3></header>
-    <article>
-      速度場
-      <div class="tex">
-        \left\{\!\!\begin{array}{l}
-        u(x, y, t) = -2 \cos \left( \frac{\pi t}{T} \right) \sin^2(\pi x) \cos(\pi y) \sin(\pi y) \\[2em] 
-        v(x, y, z) = 2 \cos \left( \frac{\pi t}{T} \right) \cos(\pi x) \sin(\pi x) \sin^2(\pi y)
-        \end{array}\right.
-        \quad (T = 8)
-      </div>
-    </article>
-    <div style="float: left;">
-      <header><h4>1次<h4></header>
-      <p><img src="./image1_rk1.gif"></p>
-    </div>
-    <div style="float: left;">
-      <header><h4>4次</h4></header>
-      <p><img src="./image1_rk4.gif"></p>
-    </div>
-    <br style="clear: both;">
-  </article>
+    -->
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+    <script>
+    <!--
+    ['./image1_rk1.gif', './image1_rk4.gif', './image2_rk1.gif', './image2_rk4.gif'].forEach(
+      function(src){ (new Image()).src = src; }
+    );
 
-  <article>
-    <header><h3>例2</h3></header>
-    <article>
-      速度場
-      <div class="tex">
-        \left\{\!\!\begin{array}{l}
-        u(x, y, t) = \cos \left( \frac{\pi t}{T} \right) \sin \left( 4 \pi (x + 0.5) \right) \sin \left( 4 \pi (y + 0.5) \right)  \\[2em] 
-        v(x, y, z) = \cos \left( \frac{\pi t}{T} \right) \cos \left( 4 \pi (x + 0.5) \right) \cos \left( 4 \pi (y + 0.5) \right) 
-        \end{array}\right.
-        \quad (T = 2)
-      </div>
-    </article>
-    <div style="float: left;">
-      <header><h4>1次</h4></header>
-      <p><img src="./image2_rk1.gif"></p>
-    </div>
-    <div style="float: left;">
-      <header><h4>4次</h4></header>
-      <p><img src="./image2_rk4.gif"></p>
-    </div>
-    <br style="clear: both;">
-  </article>
+    window.onload = function() {
+      document.querySelectorAll('[class=tex]').forEach(
+        function(e){
+          console.log(e.textContent);
+          katex.render(e.textContent, e, {displayMode: true});
+        }
+      );
+    }
+    -->
+    </script>
+  </head>
+  <body>
+    <header><h1>ルンゲ－クッタ法</h1></header>
 
-  <article>
-    <h2>参考文献</h2>
-    <p>以下の情報を参考にした。</p>
-    <ul>
-      <li><a href="https://ja.wikipedia.org/wiki/%E3%83%AB%E3%83%B3%E3%82%B2%EF%BC%9D%E3%82%AF%E3%83%83%E3%82%BF%E6%B3%95">ルンゲ＝クッタ法 - Wikipedia</a></li>
-      <li><a href="https://www.amazon.co.jp/dp/4777514773">青木尊之, 額田彰 『はじめてのCUDAプログラミング』 (工学社, 2009)</a></li>
-    </ul>
-  </article>
-</body>
+    <article>
+      <header><h3>例1<h3></header>
+      <article>
+        速度場
+        <div class="tex">
+          \left\{\!\!\begin{array}{l}
+          u(x, y, t) = -2 \cos \left( \frac{\pi t}{T} \right) \sin^2(\pi x) \cos(\pi y) \sin(\pi y) \\[2em] 
+          v(x, y, z) = 2 \cos \left( \frac{\pi t}{T} \right) \cos(\pi x) \sin(\pi x) \sin^2(\pi y)
+          \end{array}\right.
+          \quad (T = 8)
+        </div>
+      </article>
+      <div style="float: left;">
+        <header><h4>1次<h4></header>
+        <p><img src="./image1_rk1.gif"></p>
+      </div>
+      <div style="float: left;">
+        <header><h4>4次</h4></header>
+        <p><img src="./image1_rk4.gif"></p>
+      </div>
+      <br style="clear: both;">
+    </article>
+
+    <article>
+      <header><h3>例2</h3></header>
+      <article>
+        速度場
+        <div class="tex">
+          \left\{\!\!\begin{array}{l}
+          u(x, y, t) = \cos \left( \frac{\pi t}{T} \right) \sin \left( 4 \pi (x + 0.5) \right) \sin \left( 4 \pi (y + 0.5) \right)  \\[2em] 
+          v(x, y, z) = \cos \left( \frac{\pi t}{T} \right) \cos \left( 4 \pi (x + 0.5) \right) \cos \left( 4 \pi (y + 0.5) \right) 
+          \end{array}\right.
+          \quad (T = 2)
+        </div>
+      </article>
+      <div style="float: left;">
+        <header><h4>1次</h4></header>
+        <p><img src="./image2_rk1.gif"></p>
+      </div>
+      <div style="float: left;">
+        <header><h4>4次</h4></header>
+        <p><img src="./image2_rk4.gif"></p>
+      </div>
+      <br style="clear: both;">
+    </article>
+
+    <article>
+      <h2>参考文献</h2>
+      <p>以下の情報を参考にした。</p>
+      <ul>
+        <li><a href="https://ja.wikipedia.org/wiki/%E3%83%AB%E3%83%B3%E3%82%B2%EF%BC%9D%E3%82%AF%E3%83%83%E3%82%BF%E6%B3%95">ルンゲ＝クッタ法 - Wikipedia</a></li>
+        <li><a href="https://www.amazon.co.jp/dp/4777514773">青木尊之, 額田彰 『はじめてのCUDAプログラミング』 (工学社, 2009)</a></li>
+      </ul>
+    </article>
+  </body>
 </html>
