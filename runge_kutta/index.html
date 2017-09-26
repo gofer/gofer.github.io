@@ -22,10 +22,7 @@
 
     window.onload = function() {
       document.querySelectorAll('[class=tex]').forEach(
-        function(e){
-          console.log(e.textContent);
-          katex.render(e.textContent, e, {displayMode: true});
-        }
+        (e) => { katex.render(e.textContent, e, {displayMode: true}); }
       );
     }
     -->
