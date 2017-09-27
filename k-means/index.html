@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
   <head>
@@ -51,7 +52,11 @@
     }
     
     input {
-      width: 10em;
+      width: 6em;
+    }
+    
+    input#drwa-line-checkbox {
+      width: 1em;
     }
     
     canvas#canvas {
@@ -70,7 +75,7 @@
       var number_of_samples  = document.getElementById('number-of-samples').value;
       var number_of_clusters = document.getElementById('number-of-clusters').value;
       
-      var means = [];
+      means = [];
       for (let index = 0; index < number_of_clusters; ++index) {
         means[index] = calculateMeansOfCluster(samples, index);
       }
@@ -106,6 +111,13 @@
       }
     }
     
+    function doRedraw() {
+      var number_of_samples  = document.getElementById('number-of-samples').value;
+      var number_of_clusters = document.getElementById('number-of-clusters').value;
+      
+      draw(samples, number_of_samples, number_of_clusters, means);
+    }
+    
     function doKaTeX() {
       document.querySelectorAll('.tex.outline').forEach(
         (e) => { katex.render(e.textContent, e, {displayMode: true}); }
@@ -122,6 +134,8 @@
       document.getElementById('initialize-button').onclick = () => { doInitialize(); };
       document.getElementById('calculate-1step-button').onclick = () => { doCalculate(); };
       document.getElementById('calculate-animate-button').onclick = () => { doAnimate(); };
+      
+      document.getElementById('drwa-line-checkbox').onclick = () => { doRedraw(); };
       
       doInitialize();
       
@@ -148,6 +162,7 @@
             <label>クラスタ数(k):</label>
             <input size="4" maxlength="4" type="number" id="number-of-clusters" value="0"></input>
             <button id="initialize-button">初期化</button>
+            <label><input type="checkbox" id="drwa-line-checkbox" checked>線の表示</label>
           </div>
         </div>
       </article>
