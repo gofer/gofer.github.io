@@ -10,6 +10,7 @@ const ColorOfClusters = [
 ];
 
 var samples = null;
+var means = null;
 
 function getRandomInt(min, max) {
   return Math.floor( Math.random() * (max - min + 1) ) + min;
@@ -34,15 +35,24 @@ function generateSamples(number_of_samples, number_of_clusters) {
   return samples;
 }
 
-function drawPoint(context, x, y, bg_color='white', fg_color='black') {
+function drawPoint(context, position, bg_color='white', fg_color='black') {
   context.beginPath();
   context.fillStyle = bg_color;
-  context.arc(x, y, PointRadius - 1, 0, Math.PI * 2, false);
+  context.arc(position.x, position.y, PointRadius - 1, 0, Math.PI * 2, false);
   context.fill();
   
   context.beginPath();
   context.strokeStyle = fg_color;
-  context.arc(x, y, PointRadius, 0, Math.PI * 2, false);
+  context.arc(position.x, position.y, PointRadius, 0, Math.PI * 2, false);
+  context.stroke();
+}
+
+function drawLine(context, sample_position, mean_position, fg_color='black')
+{
+  context.beginPath();
+  context.strokeStyle = fg_color;
+  context.moveTo(sample_position.x, sample_position.y);
+  context.lineTo(mean_position.x, mean_position.y);
   context.stroke();
 }
 
@@ -59,10 +69,23 @@ function draw(samples, number_of_samples, number_of_clusters, means = null) {
   context.fillStyle = 'white';
   context.fillRect(0, 0, CanvasWidth, CanvasHeight);
   
+  var draw_line_flag = document.getElementById('drwa-line-checkbox').checked;
+  if (means && draw_line_flag) {
+    samples.forEach(
+      (sample, index) => {
+        drawLine(
+          context, 
+          sample.position, means[sample.cluster], 
+          ColorOfClusters[sample.cluster]
+        )
+      }
+    );
+  }
+  
   samples.forEach(
-    (sample, index) => { 
+    (sample, index) => {
       drawPoint(
-        context, sample.position.x, sample.position.y, 
+        context, sample.position, 
         ColorOfClusters[sample.cluster]
       );
     }
@@ -71,7 +94,7 @@ function draw(samples, number_of_samples, number_of_clusters, means = null) {
   if (means) {
     for (let i = 0; i < number_of_clusters; ++i) {
       drawPoint(
-        context, means[i].x, means[i].y, 
+        context, means[i], 
         'white', ColorOfClusters[i]
       );
     }
