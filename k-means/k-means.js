@@ -1,6 +1,7 @@
 const CanvasWidth  = 800;
 const CanvasHeight = 600;
 const PointRadius = 5;
+const AnimationWait = 100;
 const InitialNumberOfSamples  = 40;
 const InitialNumberOfClusters = 4;
 const ColorOfClusters = [
@@ -62,6 +63,9 @@ function draw(samples, number_of_samples, number_of_clusters, means = null) {
     alert('このブラウザはcanvasをサポートしていません。');
     return false;
   }
+  
+  canvas.width  = CanvasWidth;
+  canvas.height = CanvasHeight;
   
   var context = canvas.getContext('2d');
   
@@ -151,4 +155,51 @@ function reselectNearestCluster(samples, means) {
     return {position: sample.position, cluster: new_cluster};
   });
   return {flag: flag, samples: new_samples};
+}
+
+function doCalculate() {
+  var number_of_samples  = document.getElementById('number-of-samples').value;
+  var number_of_clusters = document.getElementById('number-of-clusters').value;
+  
+  means = [];
+  for (let index = 0; index < number_of_clusters; ++index) {
+    means[index] = calculateMeansOfCluster(samples, index);
+  }
+  
+  var result = reselectNearestCluster(samples, means);
+  samples = result.samples;
+  
+  draw(samples, number_of_samples, number_of_clusters, means);
+  
+  return result.flag;
+}
+
+function enableController(flag) {
+  [
+    'number-of-samples', 
+    'number-of-clusters', 
+    'initialize-button', 
+    'calculate-1step-button', 
+    'calculate-animate-button'
+  ].forEach((id) => {
+    document.getElementById(id).disabled = flag ? '' : 'disabled';
+  });
+}
+
+function doAnimate() {
+  enableController(false);
+  
+  var result = doCalculate();
+  if (result) {
+    setTimeout(doAnimate, AnimationWait);
+  } else {
+    enableController(true);
+  }
+}
+
+function doRedraw() {
+  var number_of_samples  = document.getElementById('number-of-samples').value;
+  var number_of_clusters = document.getElementById('number-of-clusters').value;
+  
+  draw(samples, number_of_samples, number_of_clusters, means);
 }

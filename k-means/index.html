@@ -71,53 +71,6 @@
     <script src="./k-means.js"></script>
     <script>
     <!--
-    function doCalculate() {
-      var number_of_samples  = document.getElementById('number-of-samples').value;
-      var number_of_clusters = document.getElementById('number-of-clusters').value;
-      
-      means = [];
-      for (let index = 0; index < number_of_clusters; ++index) {
-        means[index] = calculateMeansOfCluster(samples, index);
-      }
-      
-      var result = reselectNearestCluster(samples, means);
-      samples = result.samples;
-      
-      draw(samples, number_of_samples, number_of_clusters, means);
-      
-      return result.flag;
-    }
-
-    function enableController(flag) {
-      [
-        'number-of-samples', 
-        'number-of-clusters', 
-        'initialize-button', 
-        'calculate-1step-button', 
-        'calculate-animate-button'
-      ].forEach((id) => {
-        document.getElementById(id).disabled = flag ? '' : 'disabled';
-      });
-    }
-
-    function doAnimate() {
-      enableController(false);
-      
-      var result = doCalculate();
-      if (result) {
-        setTimeout(doAnimate, 100);
-      } else {
-        enableController(true);
-      }
-    }
-    
-    function doRedraw() {
-      var number_of_samples  = document.getElementById('number-of-samples').value;
-      var number_of_clusters = document.getElementById('number-of-clusters').value;
-      
-      draw(samples, number_of_samples, number_of_clusters, means);
-    }
-    
     function doKaTeX() {
       document.querySelectorAll('.tex.outline').forEach(
         (e) => { katex.render(e.textContent, e, {displayMode: true}); }
