@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>LL(1) 構文解析器</title>
+    <link rel="stylesheet" href="base.css">
+    <script src="utils.js"></script>
+    <script src="ll1_parser.js"></script>
+    <script><!--
+    const InitialGrammer = new String("; 足し算\nS -> E $\nE -> T E'\nE' -> + T E' | ε\nT -> int");
+    //const InitialGrammer = new String("E -> E - I | I\nI -> x | y | z");
+    //const InitialGrammer = new String("E -> I E' $\nE' -> - I E' | \nI -> x | y | z");
+    //const InitialGrammer = new String("X -> Y | a\nY->c |\nZ -> d | X Y Z");
+    //const InitialGrammer = new String("S -> E $\nE -> T E'\nE' -> + T E' | - T E' |\nT -> F T'\nT' -> * F T' | / F T' |\nF -> id | num | ( E )");
+    
+    function debug(mesg) {
+      var debug = document.getElementById('debug');
+      debug.innerText += mesg + "\n";
+    }
+    
+    window.onload = function() {
+      document.getElementById('grammer').value = InitialGrammer;
+      
+      document.getElementById('submit').onclick = do_parse;
+      
+      document.getElementById('clear').onclick = function(){
+        document.getElementById('result').value = '';
+        document.getElementById('parsing_table').innerHTML = '';
+      }
+    }
+    --></script>
+  </head>
+  <body>
+    <header><h1>LL(1) 構文解析器</h1></header>
+    <article>
+      <div class="container" id="summary">
+        <table>
+          <caption>記法の説明</caption>
+          <thead>
+            <tr>
+              <th>要素</th>
+              <th>例</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>コメント</td>
+              <td><pre><code>; comment</code></pre></td>
+              <td><pre><code>;</code></pre>で始まる行はコメントになります。</td>
+            </tr>
+            <tr>
+              <td>非終端記号</td>
+              <td><pre><code>S</code></pre>, <pre><code>E'</code></pre></td>
+              <td>半角英数字の大文字で始まる記号は非終端記号です。</td>
+            </tr>
+            <tr>
+              <td>終端記号</td>
+              <td><pre><code>a</code></pre>, <pre><code>int</code></pre>, <pre><code>+</code></pre></td>
+              <td>非終端記号でない記号(半角英数字の小文字や記号ではじまる記号)は終端記号です。</td>
+            </tr>
+            <tr>
+              <td>空列記号</td>
+              <td><pre><code>ε</code></pre></td>
+              <td><pre><code>ε</code></pre>は特別に予約された記号で、空列を意味します。</td>
+            </tr>
+            <tr>
+              <td rowspan="2">生成規則</td>
+              <td>
+                <div><pre><code>A -> X Y z</code></pre></div>
+                <div><pre><code>A -> x</code></pre></div>
+                <div><pre><code>A -> y</code></pre></div>
+                <div><pre><code>A -> ε</code></pre></div>
+              </td>
+              <td rowspan="2">
+                <div>生成規則は左辺と右辺を<pre><code>-></code></pre>で区切り、左辺は必ず単一の非終端記号で構成されます。</div>
+                <div>右辺は記号を半角スペースで区切ったもので、<pre><code>|</code></pre>によって複数の規則を並列することができます。</div>
+                <div>右辺が空文字列の場合は<pre><code>ε</code></pre>があるものとして処理されます。</div>
+              </td>
+            </tr>
+            <tr><td><pre><code>A -> X Y z | x | y |</code></pre></td></tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="container"><textarea id="grammer" cols="80" rows="20"></textarea></div>
+      <div class="container"><button id="submit">Submit</button><span style="padding: 4px;"></span><button id="clear">Clear</button></div>
+      <div class="container"><textarea id="result" cols="120" rows="20" readonly></textarea></div>
+      <div class="container" id="parsing_table"></div>
+    </article>
+  </body>
+</html>

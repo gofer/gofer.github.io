@@ -1,0 +1,10 @@
+* { padding: 0; margin: 0; box-sizing: border-box; overflow-wrap: break-word; word-wrap: break-word; }
+html,body { width: 100%; height: 100%; }
+body>header, body>article { min-width: 1024px; width: 50%; padding: 16px; margin: 0 auto; background-color: white; }
+pre, code { display: inline; }
+div.container { padding: 8px 0; }
+textarea { padding: 4px; border: 1px solid black; }
+button { padding: 4px 8px; border: 1px solid black; background-color: #dbdbdb; }
+table { border-spacing: 0; border-left: 1px solid black; border-top: 1px solid black; }
+th, td { padding: 4px; border-right: 1px solid black; border-bottom: 1px solid black; }
+#summary td pre>code { background-color: #dbdbdb; padding: 2px 4px; }
